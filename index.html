@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cerita Kita — Auto Story (Fixed)</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+         :root {
+            --bg: #05060a;
+            --muted: rgba(255, 255, 255, .12);
+            --accent: #60a5fa;
+            --pink: #fb7185
+        }
+        
+        * {
+            box-sizing: border-box
+        }
+        
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: var(--bg);
+            color: #fff;
+            font-family: Poppins, system-ui, Segoe UI, Roboto;
+            overflow: hidden
+        }
+        
+        .swiper {
+            width: 100%;
+            height: 100vh
+        }
+        
+        .swiper-wrapper {
+            height: 100%
+        }
+        
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            text-align: center;
+            position: relative
+        }
+        
+        .slide-frame {
+            opacity: 0;
+            transform: translateY(10px)
+        }
+        
+        .headline {
+            font-size: clamp(22px, 5vw, 44px);
+            font-weight: 600;
+            margin-bottom: 8px
+        }
+        
+        .sub {
+            opacity: .85;
+            font-size: clamp(12px, 2.4vw, 18px)
+        }
+        
+        .photo-pair {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            justify-content: center
+        }
+        
+        .photo-card {
+            width: 200px;
+            height: 260px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .06);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, .6)
+        }
+        
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+        
+        .label {
+            margin-top: 10px;
+            font-size: 14px;
+            opacity: .9
+        }
+        
+        .chat-wrap {
+            width: min(420px, 92vw);
+            max-height: 70vh;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(0, 0, 0, .2));
+            border-radius: 22px;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, .04);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .6)
+        }
+        
+        .chat-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: stretch
+        }
+        
+        .chat-box {
+            max-width: 74%;
+            padding: 10px 12px;
+            border-radius: 14px;
+            font-size: 15px;
+            line-height: 1.3;
+            opacity: 0;
+            transform: translateY(8px)
+        }
+        
+        .chat-left {
+            align-self: flex-start;
+            background: linear-gradient(180deg, var(--accent), #204945);
+            border: 1px solid rgba(255, 255, 255, .04)
+        }
+        
+        .chat-right {
+            align-self: flex-end;
+            background: linear-gradient(180deg, var(--accent), #1d3ea9);
+            color: #fff
+        }
+        
+        .quote {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 10px
+        }
+        
+        .quote p {
+            font-size: clamp(16px, 3vw, 22px);
+            opacity: 0;
+            transform: translateY(8px)
+        }
+        
+        .hearts {
+            position: absolute;
+            left: 50%;
+            top: 18%;
+            transform: translateX(-50%);
+            pointer-events: none
+        }
+        
+        .heart {
+            display: inline-block;
+            font-size: 20px;
+            margin: 0 6px;
+            opacity: .9
+        }
+        
+        .visible {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: opacity .8s ease, transform .8s ease
+        }
+        
+        .swiper-button-next,
+        .swiper-button-prev,
+        .swiper-pagination {
+            display: none
+        }
+        
+        .ending {
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05), transparent);
+        }
+        
+        .big-heart {
+            font-size: clamp(60px, 15vw, 160px);
+            margin-top: 20px;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="swiper">
+        <div class="swiper-wrapper">
+
+            <!-- Intro -->
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <div class="headline">Cerita kita dimulai di sini 💫</div>
+                    <div class="sub">Duduk manis, biar aku yang cerita…</div>
+                </div>
+            </section>
+
+            <!-- Photo pair (left-right) -->
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <div class="photo-pair">
+                        <div class="photo-card"><img src="foto.jpg" alt="Rachael"></div>
+                        <div class="photo-card"><img src="foto.jpg" alt="Tyo"></div>
+                    </div>
+                    <div class="hearts"><span class="heart">💞</span><span class="heart">✨</span><span class="heart">💖</span></div>
+                    <div class="headline">Di satu waktu kamu deketin aku saat aku sedang gundah</div>
+                    <div class="sub">Aku yang lagi butuh ditemani, dan kamu datang dengan segala perhatianmu.</div>
+                </div>
+            </section>
+
+
+            <!-- Chat animation slide -->
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <div class="chat-wrap">
+                        <div class="chat-inner" id="chat">
+                            <div class="chat-box chat-left">Tyo: hi boleh kenalan?</div>
+                            <div class="chat-box chat-right">Rachael: boleh</div>
+                            <div class="chat-box chat-left">Tyo: umur berapa?</div>
+                            <div class="chat-box chat-right">Rachael: kaka dulu berapa?</div>
+                            <div class="chat-box chat-left">Tyo: kenapa sih cewe di tanya malah nanya balik</div>
+                            <div class="chat-box chat-right">Rachael: hehe aku 26 ka</div>
+                            <div class="chat-box chat-left">Tyo: udah ada cp?</div>
+                            <div class="chat-box chat-right">Rachael: udah lagi di ghosting</div>
+                            <div class="chat-box chat-left">Tyo: yang jauh pasti kalah dengan yang deket</div>
+                            <div class="chat-box chat-right">Rachael: aku lagi mau mengakhiri ka, tunggu ya kita pendekatan aja dulu</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Narrative slides -->
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <p class="headline">Lalu aku menghilang 2 hari — kamu masih menungguku ⏳</p>
+                </div>
+            </section>
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <p class="headline">Awal mulai kita berhubungan, banyak badai yang kita lalui 🌧️</p>
+                </div>
+            </section>
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <p class="headline">Disamping itu, ada juga hal-hal manis yang tak kalah membekasnya 🍭</p>
+                </div>
+            </section>
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <p class="headline">Terima kasih sudah menjadi yang paling indah 💖</p>
+                </div>
+            </section>
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <p class="headline">Jujur, kamu satu-satunya yang bisa menyayangiku sedalam itu 🥰</p>
+                </div>
+            </section>
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <p class="headline">Yang bisa menjaga komitmen hingga akhir 🤝</p>
+                </div>
+            </section>
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <p class="headline">Yang selalu memperjuangkan dan tidak tumbang walau diterpa badai 🌪️</p>
+                </div>
+            </section>
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <p class="headline">Sampai aku benar-benar mencintaimu tanpa syarat ❤️</p>
+                </div>
+            </section>
+            <section class="swiper-slide">
+                <div class="slide-frame">
+                    <p class="headline">Dan aku tetap memilihmu, menunggumu apapun yang terjadi 🌹</p>
+                </div>
+            </section>
+            <section class="swiper-slide ending">
+                <div class="slide-frame">
+                    <p class="headline">jangan pernah kapok yah bareng aku</p>
+                    <div class="big-heart">❤️</div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script>
+        // CDNs
+        const SWIPER_CDN = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+        const GSAP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js';
+
+        // load script with sequential guarantee
+        function loadScript(url) {
+            return new Promise((resolve, reject) => {
+                if (document.querySelector(`script[src="${url}"]`)) return resolve();
+                const s = document.createElement('script');
+                s.src = url;
+                // ensure executed in insertion order
+                s.async = false;
+                s.onload = () => resolve();
+                s.onerror = () => reject(new Error('Failed to load ' + url));
+                document.head.appendChild(s);
+            });
+        }
+
+        // load swiper first, then try gsap (but don't fail if gsap blocked)
+        loadScript(SWIPER_CDN)
+            .then(() => loadScript(GSAP_CDN).catch(err => {
+                console.warn('GSAP not loaded — animation will use CSS fallback', err);
+            }))
+            .then(() => initApp())
+            .catch(err => {
+                console.error('Critical script load failed:', err);
+                initApp();
+            });
+
+        function initApp() {
+            // ensure Swiper is available
+            const SwiperClass = window.Swiper;
+            if (!SwiperClass) {
+                console.error('Swiper library not available. This story requires Swiper (CDN failed).');
+                // graceful degrade: show all slides by toggling visible class
+                document.querySelectorAll('.slide-frame').forEach((f, i) => setTimeout(() => f.classList.add('visible'), i * 800));
+                return;
+            }
+
+            const swiper = new SwiperClass('.swiper', {
+                allowTouchMove: false,
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                speed: 900
+            });
+
+            const slides = Array.from(document.querySelectorAll('.swiper-slide'));
+            const chatIndex = 2; // zero-based
+            const chatBoxes = Array.from(document.querySelectorAll('#chat .chat-box'));
+
+            // initial state
+            slides.forEach(s => {
+                const f = s.querySelector('.slide-frame');
+                if (f) {
+                    f.style.opacity = 0;
+                    f.style.transform = 'translateY(10px)';
+                }
+            });
+            chatBoxes.forEach(c => {
+                c.style.opacity = 0;
+                c.style.transform = 'translateY(8px)';
+            });
+
+            function animateIn(index) {
+                const s = slides[index];
+                if (!s) return;
+                const frame = s.querySelector('.slide-frame');
+                if (!frame) return;
+                if (window.gsap) {
+                    window.gsap.fromTo(frame, {
+                        opacity: 0,
+                        y: 30,
+                        scale: 0.95
+                    }, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 1.6,
+                        ease: 'power3.out'
+                    });
+                } else {
+                    frame.classList.add('visible');
+                }
+            }
+
+
+            function animateOut(index) {
+                const s = slides[index];
+                if (!s) return;
+                const frame = s.querySelector('.slide-frame');
+                if (!frame) return;
+                if (window.gsap && typeof window.gsap.to === 'function') {
+                    window.gsap.to(frame, {
+                        opacity: 0,
+                        y: 8,
+                        duration: 0.3
+                    });
+                } else {
+                    frame.classList.remove('visible');
+                }
+            }
+
+            function resetChat() {
+                chatBoxes.forEach(c => {
+                    c.style.opacity = 0;
+                    c.style.transform = 'translateY(8px)';
+                    c.classList.remove('visible');
+                });
+            }
+
+            function playChatSequence() {
+                resetChat();
+                if (window.gsap && typeof window.gsap.to === 'function') {
+                    chatBoxes.forEach((c, i) => {
+                        window.gsap.to(c, {
+                            opacity: 1,
+                            y: 0,
+                            delay: i * 1.5 + 0.6, // jeda lebih panjang
+                            duration: 1.2, // animasi lebih halus
+                            ease: 'power3.out'
+                        });
+                    });
+                } else {
+                    chatBoxes.forEach((c, i) =>
+                        setTimeout(() => c.classList.add('visible'), i * 1500 + 600)
+                    );
+                }
+            }
+
+
+            // durations (ms) per slide
+            const base = 3600;
+            // durasi total = (jumlah chat - 1) * 1200 + 500 (delay pertama) + 1000 (durasi animasi) + 2000 (buffer)
+            const totalChatTime = (chatBoxes.length - 1) * 1200 + 1000 + 1500 + 2000;
+
+            const durations = slides.map((s, idx) => idx === chatIndex ? totalChatTime : base);
+
+            // orchestrator
+            function playFrom(i = 0) {
+                if (i >= slides.length) return;
+                swiper.slideTo(i);
+                animateIn(i);
+                if (i === chatIndex) playChatSequence();
+                const d = durations[i];
+                setTimeout(() => {
+                    animateOut(i);
+                    const next = i + 1;
+                    if (next < slides.length) playFrom(next);
+                }, d);
+                if (i === slides.length - 1) {
+                    const heart = slides[i].querySelector('.big-heart');
+                    if (heart && window.gsap) {
+                        window.gsap.to(heart, {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 2,
+                            delay: 1,
+                            ease: 'elastic.out(1, 0.5)'
+                        });
+                    }
+                }
+
+            }
+
+            // start
+            setTimeout(() => playFrom(0), 600);
+
+            // replay on double-click (safe calls)
+            let lastTap = 0;
+            document.body.addEventListener('click', () => {
+                const now = Date.now();
+                if (now - lastTap < 350) {
+                    // cancel ongoing animations
+                    slides.forEach(s => {
+                        const f = s.querySelector('.slide-frame');
+                        if (f) {
+                            if (window.gsap && typeof window.gsap.killTweensOf === 'function') try {
+                                window.gsap.killTweensOf(f);
+                            } catch (e) {}
+                            f.style.opacity = 0;
+                            f.style.transform = 'translateY(10px)';
+                        }
+                    });
+                    resetChat();
+                    playFrom(0);
+                }
+                lastTap = now;
+            });
+        }
+    </script>
+</body>
+
+</html>
